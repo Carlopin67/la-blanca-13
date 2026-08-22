@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>Ajedrez — Mis Partidas</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+
+<!-- iOS: modo app a pantalla completa -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Ajedrez">
+<link rel="apple-touch-icon" href="icon-180x180.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icon-152x152.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icon-192x192.png">
+
+<link rel="icon" href="icon-96x96.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ PANTALLA DE INICIO: biblioteca de partidas ============ -->
+<section id="homeView" class="view">
+  <header>
+    <div class="brand">
+      <h1>Mis partidas</h1>
+    </div>
+    <button id="newGameBtn" class="roundBtn" aria-label="Añadir partida"></button>
+  </header>
+
+  <div id="folderChips"></div>
+
+  <div id="libraryList"></div>
+  <p id="libraryEmpty" class="emptyState">Aún no has guardado ninguna partida.<br>Toca el botón "+" para añadir la primera.</p>
+</section>
+
+<!-- ============ PANTALLA DE ANÁLISIS: tablero + notas ============ -->
+<section id="analysisView" class="view" hidden>
+  <header>
+    <div class="brand">
+      <button id="backBtn" class="roundBtn" aria-label="Volver"></button>
+      <h1 id="gameTitleLabel">Partida</h1>
+    </div>
+    <button id="branchEditToggleBtn" class="roundBtn" aria-label="Editar rama" hidden></button>
+  </header>
+
+  <div id="branchBar">
+    <div id="branchChips"></div>
+  </div>
+
+  <div id="boardWrap">
+    <div id="boardFrame">
+      <div class="coordCorner"></div>
+      <div class="coordRow" id="coordTop"></div>
+      <div class="coordCorner"></div>
+
+      <div class="coordCol" id="coordLeft"></div>
+      <div id="board"></div>
+      <div class="coordCol" id="coordRight"></div>
+
+      <div class="coordCorner"></div>
+      <div class="coordRow" id="coordBottom"></div>
+      <div class="coordCorner"></div>
+    </div>
+    <div id="status"></div>
+  </div>
+
+  <div id="moveStrip"></div>
+
+  <section id="notesSection">
+    <div id="notesLabel">Notas</div>
+    <textarea id="notesArea" placeholder="Escribe tus apuntes sobre esta jugada…" spellcheck="false"></textarea>
+  </section>
+
+  <div id="controls">
+    <button id="prevBtn" aria-label="Anterior"></button>
+    <button id="nextBtn" aria-label="Siguiente"></button>
+  </div>
+
+  <div id="promotionOverlay">
+    <div id="promotionCard">
+      <p id="promotionLabel">Corona el peón en</p>
+      <div id="promotionChoices">
+        <button class="promoBtn" data-piece="Q" aria-label="Dama"></button>
+        <button class="promoBtn" data-piece="R" aria-label="Torre"></button>
+        <button class="promoBtn" data-piece="B" aria-label="Alfil"></button>
+        <button class="promoBtn" data-piece="N" aria-label="Caballo"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Hoja para añadir una partida nueva ============ -->
+<div id="addSheetOverlay">
+  <div id="addSheetCard">
+    <div class="sheetHeader">
+      <h2>Nueva partida</h2>
+      <button id="closeSheetBtn" class="roundBtn" aria-label="Cerrar"></button>
+    </div>
+    <input id="titleInput" type="text" placeholder="Título (ej. Blancas vs Negras, torneo…)" spellcheck="false">
+    <select id="folderSelect"></select>
+    <textarea id="pgnInput" placeholder="Pega aquí la notación algebraica de la partida…" spellcheck="false"></textarea>
+    <button id="saveGameBtn">Guardar partida</button>
+  </div>
+</div>
+
+<!-- ============ Hoja para crear una carpeta nueva ============ -->
+<div id="newFolderSheetOverlay">
+  <div id="newFolderSheetCard">
+    <div class="sheetHeader">
+      <h2>Nueva carpeta</h2>
+      <button id="closeFolderSheetBtn" class="roundBtn" aria-label="Cerrar"></button>
+    </div>
+    <input id="folderNameInput" type="text" placeholder="Nombre de la carpeta (ej. Aperturas, Torneo 2026…)" spellcheck="false">
+    <button id="saveFolderBtn">Crear carpeta</button>
+  </div>
+</div>
+
+<script src="pieces.js"></script>
+<script src="icons.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
